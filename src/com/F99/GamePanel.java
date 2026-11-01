@@ -9,13 +9,10 @@ import java.awt.Graphics2D;
 
 
 
-public class GamePanel extends JPanel implements Runnable{
-    
-    public static final int WIDTH = 1920;
-    public static final int HEIGHT = 1080;
+public class GamePanel extends JPanel implements Runnable,Panel{
 
-    public static final int WINDOW_WIDTH = 960;
-    public static final int WINDOW_HEIGHT = 540;
+    public static final int WINDOW_WIDTH = 1920; //960
+    public static final int WINDOW_HEIGHT = 1080;//540
 
     final int FPS = 60;
     
@@ -23,6 +20,7 @@ public class GamePanel extends JPanel implements Runnable{
     
     KeyHandler keyH = new KeyHandler();
     Track track1 = new Track();
+    Hud hud = new Hud();
     
     public GamePanel(){
         this.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
@@ -84,7 +82,6 @@ public class GamePanel extends JPanel implements Runnable{
 
     
 
-
     private void update(){
         player1.update();
     }
@@ -95,8 +92,8 @@ public class GamePanel extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g;
 
-        double scaleX = (double) WINDOW_WIDTH / WIDTH;
-        double scaleY = (double) WINDOW_HEIGHT / HEIGHT;
+        double scaleX = (double) WINDOW_WIDTH / Panel.WIDTH;
+        double scaleY = (double) WINDOW_HEIGHT / Panel.HEIGHT;
 
         g2.scale(scaleX, scaleY);
 
@@ -104,6 +101,7 @@ public class GamePanel extends JPanel implements Runnable{
         track1.draw(g2);
         player1.draw(g2);
 
+        hud.draw(g2,player1);
 
         g.dispose();
     }

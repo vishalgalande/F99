@@ -1,7 +1,5 @@
 package com.F99;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -12,7 +10,7 @@ import javax.imageio.ImageIO;
 public class Car {
     //Default Values
     double x = 200;
-    double y = 100;
+    double y = 400;
 
     int length = 50;
     int width = 25;
@@ -27,16 +25,16 @@ public class Car {
     double weight = 100;
     
     
-    double steerRate = 0.06;
     double wheelBase = length-length*0.4;  //length b/w front and back wheels
-    double angle = 0;
+    double angle = -90;
     double wheelAng = 0; //in radians
+    double steerRate = 0.05;
     
-    double minTurn = Math.toRadians(5);
-    double maxTurn = Math.toRadians(25);
+    double minTurn = Math.toRadians(2);
+    double maxTurn = Math.toRadians(26);
     
-    double power = 0.25;
-    double brakePower = 0.25; 
+    double power = 0.22;
+    double brakePower = 0.05; 
     double reversePower = 0.07;
     double engineDrag = 0.98;
     double grip = 0.5;
@@ -55,7 +53,29 @@ public class Car {
     //sprites
 
     private BufferedImage body, wheel;
-    
+
+    public int getSpeed(){
+
+        double speed =(Math.hypot(velocityX, velocityY));
+        speed = (speed*60*(3600))/(1000*(length/3));     //speed * FPS * (secons in an hour) / (1 Kilo)*(1 meter)
+
+
+        return (int)speed;
+    }
+
+    public int getAngle() {
+        double angle = (this.angle);
+        angle %= 360;
+
+
+        if(Math.signum(angle) == -1)
+        {
+            angle = 360 + angle;
+        }
+
+
+        return 360- (int)angle;
+    }
 
     public Car(KeyHandler keyH, GamePanel gp, Track track){
         this.keyH = keyH;
@@ -140,6 +160,7 @@ public class Car {
         }
         return collided;
     }
+    
     private void move(){
         
         
@@ -188,6 +209,7 @@ public class Car {
         angle += Math.toDegrees(turnRate);
 
     }
+    
     public void update(){
         //debug
         //System.out.println(detectCollision(x, y,angle) + "  v=" + Math.hypot(velocityX, velocityY));
