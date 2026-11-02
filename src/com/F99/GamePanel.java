@@ -11,8 +11,8 @@ import java.awt.Graphics2D;
 
 public class GamePanel extends JPanel implements Runnable,Panel{
 
-    public static final int WINDOW_WIDTH = 960; //960
-    public static final int WINDOW_HEIGHT = 540;//540
+    public static final int WINDOW_WIDTH = 1920; //960
+    public static final int WINDOW_HEIGHT = 1080;//540
 
     final int FPS = 60;
     
@@ -30,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable,Panel{
         //this.setDoubleBuffered(true);
         
         this.addKeyListener(keyH);
+        this.addKeyListener(keyH1);
         
         this.setFocusable(true);
         
@@ -103,11 +104,11 @@ public class GamePanel extends JPanel implements Runnable,Panel{
 
         track1.draw(g2);
         
-        //player0.draw(g2);
+        player0.draw(g2);
         player1.draw(g2);
 
         
-        //hud.draw(g2,player0,100);
+        hud.draw(g2,player0,100);
         hud.draw(g2,player1,0);
         g.dispose();
     }

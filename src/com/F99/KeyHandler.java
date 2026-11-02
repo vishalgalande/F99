@@ -54,19 +54,19 @@ public class KeyHandler implements KeyListener {
     public void keyReleased(KeyEvent arg0) {
      int code = arg0.getKeyCode();
 
-        if(code == KeyEvent.VK_W){
+        if(code == gas){
             upPressed = false;
         }
 
-        if(code == KeyEvent.VK_A){
+        if(code == left){
             leftPressed = false;  
         }
 
-        if(code == KeyEvent.VK_S){
+        if(code == brk){
             downPressed = false;
         }
 
-        if(code == KeyEvent.VK_D){
+        if(code == right){
             rightPressed = false;
         }
 
