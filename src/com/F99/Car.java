@@ -9,8 +9,8 @@ import javax.imageio.ImageIO;
 
 public class Car {
     //Default Values
-    double x = 200;
-    double y = 400;
+    double x;
+    double y;
 
     int length = 50;
     int width = 25;
@@ -77,7 +77,9 @@ public class Car {
         return 360- (int)angle;
     }
 
-    public Car(KeyHandler keyH, GamePanel gp, Track track){
+    public Car(KeyHandler keyH, GamePanel gp, Track track,int x, int y){
+        this.x = x;
+        this.y = y;
         this.keyH = keyH;
         this.gp = gp;
         this.track = track;

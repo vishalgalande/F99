@@ -11,14 +11,15 @@ import java.awt.Graphics2D;
 
 public class GamePanel extends JPanel implements Runnable,Panel{
 
-    public static final int WINDOW_WIDTH = 1920; //960
-    public static final int WINDOW_HEIGHT = 1080;//540
+    public static final int WINDOW_WIDTH = 960; //960
+    public static final int WINDOW_HEIGHT = 540;//540
 
     final int FPS = 60;
     
     private Thread gameThread;
     
-    KeyHandler keyH = new KeyHandler();
+    KeyHandler keyH = new KeyHandler(0);
+    KeyHandler keyH1 = new KeyHandler(1);
     Track track1 = new Track();
     Hud hud = new Hud();
     
@@ -41,7 +42,8 @@ public class GamePanel extends JPanel implements Runnable,Panel{
         });
     }
     
-    Car player1 = new Car(keyH, this,track1);
+    Car player0 = new Car(keyH1, this,track1,200,400);
+    Car player1 = new Car(keyH, this,track1,250,400);
     
     public void startGameThread(){
         gameThread = new Thread(this);
@@ -84,6 +86,7 @@ public class GamePanel extends JPanel implements Runnable,Panel{
 
     private void update(){
         player1.update();
+        player0.update();
     }
 
     @Override 
@@ -99,10 +102,13 @@ public class GamePanel extends JPanel implements Runnable,Panel{
 
 
         track1.draw(g2);
+        
+        //player0.draw(g2);
         player1.draw(g2);
 
-        hud.draw(g2,player1);
-
+        
+        //hud.draw(g2,player0,100);
+        hud.draw(g2,player1,0);
         g.dispose();
     }
 }
